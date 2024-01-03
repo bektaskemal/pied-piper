@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj3futurd2thr"]
+
+[ext_resource type="Script" path="res://scenes/UI/experience_bar.gd" id="1_vy7lf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lpxw"]
+bg_color = Color(0.247059, 0.14902, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh66y"]
+bg_color = Color(0, 0.6, 0.858824, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.247059, 0.14902, 0.192157, 1)
+
+[node name="ExperienceBar" type="CanvasLayer"]
+script = ExtResource("1_vy7lf")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_0lpxw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yh66y")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 26.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "XP"

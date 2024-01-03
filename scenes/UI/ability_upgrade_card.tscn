@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce2wu8plpp0wj"]
+
+[ext_resource type="Script" path="res://scenes/UI/ability_upgrade_card.gd" id="1_fq3du"]
+
+[node name="AbilityUpgradeCard" type="PanelContainer"]
+custom_minimum_size = Vector2(120, 150)
+script = ExtResource("1_fq3du")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.819608, 0.462745, 0.815686, 1)
+text = "Test name"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Write some description"
+horizontal_alignment = 1
+autowrap_mode = 2

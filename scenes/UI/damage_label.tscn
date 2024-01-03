@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dssy561noetvc"]
+
+[ext_resource type="Script" path="res://scenes/UI/damage_label.gd" id="1_mlkje"]
+
+[node name="DamageLabel" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_mlkje")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
