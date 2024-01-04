@@ -7,6 +7,7 @@ extends Node
 var focus_out = false
 
 func _ready():
+	randomize()
 	player.health_component.died.connect(on_died)
 	
 func on_died():

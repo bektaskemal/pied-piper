@@ -9,9 +9,10 @@ class_name Player
 @onready var animation_player = $AnimationPlayer as AnimationPlayer
 @onready var visuals = $Visuals as Node2D
 
-const MAX_SPEED = 125
 const ACCELERATION = 20
+const SPEED_INCREMENT = 5
 
+var max_speed = 125
 var number_of_colliding_bodies = 0
 
 func _ready():
@@ -25,7 +26,7 @@ func _ready():
 func _process(delta):
 	var movement_vector = get_movement_vector()
 	var direction = movement_vector.normalized()
-	var target_velocity = direction * MAX_SPEED
+	var target_velocity = direction * max_speed
 	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION))
 	move_and_slide()
 	
@@ -59,9 +60,13 @@ func on_body_exited(body: Node2D):
 func on_health_changed():
 	health_bar.value = health_component.get_health_percent()
 
-func on_ability_upgraded(ability_upgrade: AbilityUpgrade, current_upgrades: Dictionary):
-	if not ability_upgrade is Ability:
+func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	if not upgrade is Ability and not upgrade.id == "speed" :
+		return
+		
+	if upgrade.id == "speed":
+		max_speed += SPEED_INCREMENT
 		return
 	
-	var ability = ability_upgrade as Ability
+	var ability = upgrade as Ability
 	abilities.add_child(ability.ability_controller_scene.instantiate())

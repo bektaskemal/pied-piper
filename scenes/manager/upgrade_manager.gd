@@ -29,16 +29,9 @@ func apply_upgrade(upgrade: AbilityUpgrade):
 func pick_upgrades():
 	var filtered_upgrades = upgrade_pool.duplicate()
 	filtered_upgrades = filtered_upgrades.filter(func(e) : return not filtered_upgrades.any(func(other) : return e != other and e.parent_id == other.id))
-	
-	var upgrade_options: Array[AbilityUpgrade] = []
-	for i in 2:
-		if filtered_upgrades.is_empty():
-			break
-		var chosen_option = filtered_upgrades.pick_random() as AbilityUpgrade
-		upgrade_options.append(chosen_option)
-		filtered_upgrades = filtered_upgrades.filter(func (upgrade: AbilityUpgrade): return upgrade.id != chosen_option.id)
-		
-	return upgrade_options
+	filtered_upgrades.shuffle()
+	print(filtered_upgrades.slice(0,5))
+	return filtered_upgrades.slice(0,2)
 		
 
 func on_level_up(level: int):	
