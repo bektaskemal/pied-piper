@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvhud3fband4r"]
+[gd_scene load_steps=20 format=3 uid="uid://dvhud3fband4r"]
 
 [ext_resource type="Texture2D" uid="uid://dp32duuqu4emf" path="res://scenes/game_objects/player/player.png" id="1_0ooxu"]
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_4k4ng"]
+[ext_resource type="Shader" path="res://scenes/shaders/inline.gdshader" id="2_7y7e2"]
 [ext_resource type="PackedScene" uid="uid://bjs5xabw88l1c" path="res://scenes/component/health_component.tscn" id="2_y2gj3"]
 [ext_resource type="PackedScene" uid="uid://doh2qecs110l4" path="res://scenes/abilities/sword_ability_controller/sword_ability_controller.tscn" id="3_gmyng"]
 
@@ -42,6 +43,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/Sprite2D:material")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
 }
 
 [sub_resource type="Animation" id="Animation_n0ixb"]
@@ -91,6 +104,70 @@ _data = {
 "walk": SubResource("Animation_n0ixb")
 }
 
+[sub_resource type="Animation" id="Animation_ab48p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Visuals/Sprite2D:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_thxp8"]
+shader = ExtResource("2_7y7e2")
+shader_parameter/line_color = Color(0.909804, 0.270588, 0.215686, 1)
+shader_parameter/line_thickness = 1.2
+
+[sub_resource type="Animation" id="Animation_fucvv"]
+resource_name = "damage"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Visuals/Sprite2D:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 11.3137),
+"update": 1,
+"values": [SubResource("ShaderMaterial_thxp8"), null]
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mwls"]
+shader = ExtResource("2_7y7e2")
+shader_parameter/line_color = Color(0.262745, 0.882353, 0.701961, 1)
+shader_parameter/line_thickness = 1.2
+
+[sub_resource type="Animation" id="Animation_ijcen"]
+resource_name = "heal"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Visuals/Sprite2D:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 11.3137),
+"update": 1,
+"values": [SubResource("ShaderMaterial_7mwls"), null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_miakl"]
+_data = {
+"RESET": SubResource("Animation_ab48p"),
+"damage": SubResource("Animation_fucvv"),
+"heal": SubResource("Animation_ijcen")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14crm"]
 bg_color = Color(0.247059, 0.14902, 0.192157, 1)
 
@@ -126,6 +203,11 @@ libraries = {
 }
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_y2gj3")]
+
+[node name="HealthAnimationPlayer" type="AnimationPlayer" parent="HealthComponent"]
+libraries = {
+"": SubResource("AnimationLibrary_miakl")
+}
 
 [node name="Abilities" type="Node" parent="."]
 

@@ -9,12 +9,10 @@ class_name Player
 @onready var animation_player = $AnimationPlayer as AnimationPlayer
 @onready var visuals = $Visuals as Node2D
 
-
 const MAX_SPEED = 125
 const ACCELERATION = 20
 
 var number_of_colliding_bodies = 0
-
 
 func _ready():
 	collision_area.body_entered.connect(on_body_entered)
@@ -38,7 +36,6 @@ func _process(delta):
 			visuals.scale.x = move_dir
 	else:
 		animation_player.play("RESET")
-		
 	
 	
 func get_movement_vector():

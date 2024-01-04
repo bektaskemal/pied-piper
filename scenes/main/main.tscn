@@ -46,7 +46,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="Entities" instance=ExtResource("1_4wts3")]
 unique_name_in_owner = true
-position = Vector2(389, 125)
+position = Vector2(512, 267)
 
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
 
