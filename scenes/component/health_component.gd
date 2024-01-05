@@ -20,6 +20,8 @@ func damage(dmg: float):
 	$HealthAnimationPlayer.play("damage")
 	
 func heal(hp: float):
+	if current_health == max_health:
+		return
 	current_health = min(current_health + hp, max_health)
 	health_changed.emit()
 	$HealthAnimationPlayer.play("heal")

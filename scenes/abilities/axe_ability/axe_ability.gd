@@ -15,7 +15,7 @@ func _ready():
 	
 func tween_method(rotations: float):
 	var percent = rotations / 2 # 2 is max value defined above
-	var current_radius = percent * MAX_RADIUS
+	var current_radius = max(10, percent * MAX_RADIUS)
 	var current_dir = base_rotation.rotated(rotations * TAU)
 	
 	var player = get_tree().get_first_node_in_group("player") as Player

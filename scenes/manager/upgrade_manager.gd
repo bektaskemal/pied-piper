@@ -30,7 +30,6 @@ func pick_upgrades():
 	var filtered_upgrades = upgrade_pool.duplicate()
 	filtered_upgrades = filtered_upgrades.filter(func(e) : return not filtered_upgrades.any(func(other) : return e != other and e.parent_id == other.id))
 	filtered_upgrades.shuffle()
-	print(filtered_upgrades.slice(0,5))
 	return filtered_upgrades.slice(0,2)
 		
 
