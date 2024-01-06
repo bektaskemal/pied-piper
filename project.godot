@@ -45,6 +45,10 @@ window/size/mode.debug=0
 movie_writer/mjpeg_quality=0.9
 movie_writer/movie_file="/home/kemalbektas/Godot/PiedPiper/videos/demo.avi"
 
+[gui]
+
+theme/custom="res://resources/theme/theme.tres"
+
 [input]
 
 move_left={
@@ -88,4 +92,3 @@ left_click={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-anti_aliasing/quality/msaa_2d=2

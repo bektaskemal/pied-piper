@@ -8,6 +8,8 @@ func _process(delta):
 		return
 	var time_left = arena_time_manager.get_time_left()
 	label.text = format_seconds_to_str(time_left)
+	if time_left < 11:
+		label.add_theme_font_size_override("font_size", 24)
 	
 
 func format_seconds_to_str(time_in_secs: float):

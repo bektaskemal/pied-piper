@@ -22,7 +22,7 @@ func on_attacked(attacker: Area2D):
 	var label = dmg_label.instantiate() as Label
 	label.text = str(attacker_hitbox.damage)
 	label.global_position = get_parent().global_position + Vector2(-8, -30)
-	if attacker_hitbox.damage >= 10: # TODO: Magic Number
+	if attacker_hitbox.damage == attacker_hitbox.max_damage:
 		label.add_theme_color_override("font_color", Color("E84537"))
 	else:
 		label.add_theme_color_override("font_color", Color("FF706D"))

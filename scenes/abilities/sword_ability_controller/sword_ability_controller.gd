@@ -40,6 +40,7 @@ func on_timer_timeout():
 	foreground_layer.add_child(sword)
 	var dmg = randi_range(min_damage, max_damage)
 	sword.hitbox_component.damage = dmg
+	sword.hitbox_component.max_damage = max_damage
 	sword.global_position = closest_enemy.global_position
 	sword.global_position += Vector2.RIGHT.rotated(randf_range(0,TAU)) * 4
 	

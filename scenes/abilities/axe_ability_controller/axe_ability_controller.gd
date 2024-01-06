@@ -4,8 +4,8 @@ extends Node
 
 @onready var timer = $Timer as Timer
 
-var min_damage = 7
-var max_damage = 13
+var min_damage = 9
+var max_damage = 15
 var base_wait_time 
 
 func _ready():
@@ -28,6 +28,7 @@ func on_timeout():
 	
 	var dmg = randi_range(min_damage, max_damage)
 	axe.hitbox_component.damage = dmg
+	axe.hitbox_component.max_damage = max_damage
 
 func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
 	if upgrade.id != "axe_rate": # Not related to sword
