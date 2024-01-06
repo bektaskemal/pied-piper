@@ -1,6 +1,6 @@
 extends Node
 
-@export var upgrade_pool: Array[AbilityUpgrade]
+@export var upgrade_pool: Array[AbilityUpgrade] # TODO: Consider WeightedTable
 @export var experience_manager: ExperienceManager
 @export var upgrade_screen_scene: PackedScene
 

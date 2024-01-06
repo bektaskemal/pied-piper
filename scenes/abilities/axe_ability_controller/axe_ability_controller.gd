@@ -4,13 +4,17 @@ extends Node
 
 @onready var timer = $Timer as Timer
 
-var min_damage = 9
-var max_damage = 15
+var base_min_damage = 8
+var base_max_damage = 12
+var min_damage
+var max_damage 
 var base_wait_time 
 
 func _ready():
 	timer.timeout.connect(on_timeout)
 	base_wait_time = timer.wait_time
+	min_damage = base_min_damage
+	max_damage = base_max_damage
 	GameEvents.ability_upgrade_added.connect(on_ability_upgraded)
 	
 func on_timeout():
@@ -31,8 +35,13 @@ func on_timeout():
 	axe.hitbox_component.max_damage = max_damage
 
 func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
-	if upgrade.id != "axe_rate": # Not related to sword
+	if upgrade.id == "axe_rate":
+		var percent_reduction = min(0.9, current_upgrades["axe_rate"]["quantity"] * .1)
+		timer.wait_time = base_wait_time * (1 - percent_reduction)
+		timer.start() # reset
 		return
-	var percent_reduction = min(0.9, current_upgrades["axe_rate"]["quantity"] * .1)
-	timer.wait_time = base_wait_time * (1 - percent_reduction)
-	timer.start() # reset
+	
+	if upgrade.id == "axe_damage":
+		var percent_increase = min(1.0, current_upgrades["axe_damage"]["quantity"] * .1)
+		min_damage = ceil(base_min_damage * (1 + percent_increase))
+		max_damage = ceil(base_max_damage * (1 + percent_increase))

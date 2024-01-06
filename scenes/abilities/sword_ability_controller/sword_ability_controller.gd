@@ -4,8 +4,10 @@ extends Node
 
 @onready var timer = $Timer as Timer
 
-var min_damage = 5
-var max_damage = 10
+var base_min_damage = 5
+var base_max_damage = 8
+var min_damage
+var max_damage
 var base_wait_time 
 
 const MAX_RANGE = 100 # export if needs configuration 
@@ -15,6 +17,8 @@ const MAX_RANGE = 100 # export if needs configuration
 func _ready():
 	timer.timeout.connect(on_timer_timeout)
 	base_wait_time = timer.wait_time
+	min_damage = base_min_damage
+	max_damage = base_max_damage
 	GameEvents.ability_upgrade_added.connect(on_ability_upgraded)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,10 +52,17 @@ func on_timer_timeout():
 	sword.rotation = enemy_direction.angle()
 	
 func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
-	if upgrade.id != "sword_rate": # Not related to sword
+	if upgrade.id == "sword_rate":
+		var percent_reduction = min(0.9, current_upgrades["sword_rate"]["quantity"] * .1)
+		timer.wait_time = base_wait_time * (1 - percent_reduction)
+		timer.start() # reset
 		return
-	var percent_reduction = min(0.9, current_upgrades["sword_rate"]["quantity"] * .1)
-	timer.wait_time = base_wait_time * (1 - percent_reduction)
-	timer.start() # reset
+	
+	if upgrade.id == "sword_damage":
+		var percent_increase = min(1.5, current_upgrades["sword_damage"]["quantity"] * .15)
+		min_damage = ceil(base_min_damage * (1 + percent_increase))
+		max_damage = ceil(base_max_damage * (1 + percent_increase))
+		
+		
 	
 	

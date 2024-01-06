@@ -107,7 +107,7 @@ vial_scene = ExtResource("5_7pjxy")
 health_component = NodePath("../HealthComponent")
 
 [node name="HealVialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_af156")]
-drop_percent = 0.02
+drop_percent = 0.025
 vial_scene = ExtResource("6_j3kl3")
 health_component = NodePath("../HealthComponent")
 
