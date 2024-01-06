@@ -2,7 +2,9 @@ extends Area2D
 class_name HurtboxComponent
 
 @export var health_component: HealthComponent
-@export var dmg_label: PackedScene
+#@export var dmg_label: PackedScene
+
+var dmg_label: PackedScene = preload("res://scenes/UI/floating_text.tscn")
 
 
 func _ready():
@@ -18,16 +20,13 @@ func on_attacked(attacker: Area2D):
 	var attacker_hitbox = attacker as HitboxComponent
 	
 	health_component.damage(attacker_hitbox.damage)
-	
-	var label = dmg_label.instantiate() as Label
-	label.text = str(attacker_hitbox.damage)
-	label.global_position = get_parent().global_position + Vector2(-8, -30)
-	if attacker_hitbox.damage == attacker_hitbox.max_damage:
-		label.add_theme_color_override("font_color", Color("E84537"))
-	else:
-		label.add_theme_color_override("font_color", Color("FF706D"))
+	var is_crit = (attacker_hitbox.damage == attacker_hitbox.max_damage)
+	var max_scale = 1.5 if is_crit else 1.0
+	var label = dmg_label.instantiate() as Node2D
+	get_tree().get_first_node_in_group("foreground_layer").add_child(label)
+	label.global_position = global_position + Vector2.UP * 16
+	label.start(str(attacker_hitbox.damage), max_scale)
 		
-	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
-	foreground_layer.add_child(label)
+	
 	
 	

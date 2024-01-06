@@ -57,7 +57,7 @@ func on_body_entered(body: Node2D):
 func on_body_exited(body: Node2D):
 	number_of_colliding_bodies -= 1
 	
-func on_health_changed():
+func on_health_changed(change):
 	health_bar.value = health_component.get_health_percent()
 
 func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):

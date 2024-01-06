@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cwu16vor8ekmn"]
+
+[ext_resource type="Shader" path="res://scenes/component/player_hit_flash.gdshader" id="1_60bct"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_60bct")
+shader_parameter/lerp_percent = 0.0
+shader_parameter/color = Vector3(1, 1, 1)

@@ -16,15 +16,13 @@ func damage(dmg: float):
 	current_health = max(current_health - dmg, 0)
 	Callable(check_death).call_deferred() # call it on next idle frame
 	# error_msg: Can't change this state while flushing queries
-	health_changed.emit()
-	$HealthAnimationPlayer.play("damage")
+	health_changed.emit(-dmg)
 	
 func heal(hp: float):
 	if current_health == max_health:
 		return
 	current_health = min(current_health + hp, max_health)
-	health_changed.emit()
-	$HealthAnimationPlayer.play("heal")
+	health_changed.emit(hp)
 
 func get_health_percent():
 	if max_health <= 0:
