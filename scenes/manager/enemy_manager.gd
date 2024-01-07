@@ -6,26 +6,25 @@ extends Node
 
 @onready var timer = $Timer
 
-const MAX_ENTITIES = 800
+
 const SPAWN_RADIUS = 350
+const MAX_SPAWN_RATE = 25.0
 var current_difficulty: int = 0
 
-var base_spawn_time
+var spawn_rate_increment = 0.15
+var spawn_rate: float
 var enemy_table = WeightedTable.new()
 var enemy_speed = 60.0
 
 func _ready():
 	enemy_table.add_item(basic_enemy_scene, 10)
-	#enemy_table.add_item(wizard_enemy_scene, 10)
 	timer.timeout.connect(spawn_enemy)
 	arena_time_manager.arena_difficulty_inreased.connect(on_new_difficulty)
-	base_spawn_time = timer.wait_time
+	spawn_rate = 1/timer.wait_time
 	
 func spawn_enemy():
 	timer.start()
 	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
-	if entities_layer.get_child_count() >= MAX_ENTITIES: # TODO: COnsider changing spawn rate instead
-		return
 	
 	var spawn_position = get_spawn_position()
 	if spawn_position == null:
@@ -35,7 +34,6 @@ func spawn_enemy():
 	var enemy = enemy_scene.instantiate() as Node2D
 	
 	entities_layer.add_child(enemy) # parent is main
-	print()
 	enemy.global_position = spawn_position
 	update_enemy_speed(enemy)
 
@@ -55,12 +53,19 @@ func get_spawn_position():
 			random_dir = random_dir.rotated(PI/2)
 
 func update_enemy_speed(enemy):
-	enemy.speed = min(enemy.speed + current_difficulty * enemy.speed_increment, enemy.max_speed)
+	enemy.speed = min(enemy.speed + current_difficulty * enemy.speed_increment, enemy.max_speed\
+	if current_difficulty < 48 else 1.1 * enemy.max_speed) #Endless mode TODO: Handle better
+
+func update_spawn_rate(difficulty: float):
+	spawn_rate_increment = 0.15 + floor(difficulty / 12) * 0.1
+	spawn_rate = min(spawn_rate + spawn_rate_increment, 20)
 
 func on_new_difficulty(difficulty: int):
-	current_difficulty = difficulty
-	var time_reduction = 0.025 * min(difficulty, 32) + 0.01 * max(0, difficulty - 30)
-	timer.wait_time = max(0.04, base_spawn_time -time_reduction)
-	if difficulty == 12:
+	if difficulty == 16:
 		enemy_table.add_item(wizard_enemy_scene, 20)
+
+	current_difficulty = difficulty
+	update_spawn_rate(difficulty)
+	timer.wait_time = 1 / spawn_rate
+	
 	

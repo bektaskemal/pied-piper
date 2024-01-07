@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ygjxmlk5li0v"]
+[gd_scene load_steps=19 format=3 uid="uid://ygjxmlk5li0v"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/basic_enemy/basic_enemy.gd" id="1_s01u8"]
 [ext_resource type="Texture2D" uid="uid://bose75qjfauwd" path="res://scenes/game_objects/basic_enemy/basic_enemy.png" id="2_jn2e7"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cnpydatfohr2q" path="res://scenes/game_objects/experience_vial/experience_vial.tscn" id="5_7pjxy"]
 [ext_resource type="PackedScene" uid="uid://cldg407tl4lb7" path="res://scenes/component/death_component.tscn" id="6_65cii"]
 [ext_resource type="PackedScene" uid="uid://cs5ayku11wvwd" path="res://scenes/game_objects/heal_vial/heal_vial.tscn" id="6_j3kl3"]
+[ext_resource type="PackedScene" uid="uid://xdsfaaiij8cy" path="res://scenes/component/cleaner_component.tscn" id="7_sqvvn"]
 [ext_resource type="Shader" path="res://scenes/component/hit_flash_component.gdshader" id="10_0akgh"]
 [ext_resource type="PackedScene" uid="uid://bw03xkne4w8j" path="res://scenes/component/hit_flash_component.tscn" id="10_l31y0"]
 
@@ -110,6 +111,8 @@ health_component = NodePath("../HealthComponent")
 drop_percent = 0.025
 vial_scene = ExtResource("6_j3kl3")
 health_component = NodePath("../HealthComponent")
+
+[node name="CleanerComponent" parent="." instance=ExtResource("7_sqvvn")]
 
 [node name="DeathComponent" parent="." node_paths=PackedStringArray("healt_component", "sprite") instance=ExtResource("6_65cii")]
 healt_component = NodePath("../HealthComponent")

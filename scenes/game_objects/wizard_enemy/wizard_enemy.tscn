@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cyc8ns4vev3d2"]
+[gd_scene load_steps=19 format=3 uid="uid://cyc8ns4vev3d2"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/wizard_enemy/wizard_enemy.gd" id="1_lgrxj"]
 [ext_resource type="PackedScene" uid="uid://bjs5xabw88l1c" path="res://scenes/component/health_component.tscn" id="2_atyjy"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cnpydatfohr2q" path="res://scenes/game_objects/experience_vial/experience_vial.tscn" id="5_bchfg"]
 [ext_resource type="PackedScene" uid="uid://cs5ayku11wvwd" path="res://scenes/game_objects/heal_vial/heal_vial.tscn" id="6_t6h2s"]
 [ext_resource type="PackedScene" uid="uid://cldg407tl4lb7" path="res://scenes/component/death_component.tscn" id="7_hg0lj"]
+[ext_resource type="PackedScene" uid="uid://xdsfaaiij8cy" path="res://scenes/component/cleaner_component.tscn" id="7_oepa0"]
 [ext_resource type="PackedScene" uid="uid://brxfhke221m65" path="res://scenes/component/hurtbox_component.tscn" id="8_wdfri"]
 [ext_resource type="PackedScene" uid="uid://bw03xkne4w8j" path="res://scenes/component/hit_flash_component.tscn" id="9_ldknb"]
 [ext_resource type="Texture2D" uid="uid://dt14coc8v18ik" path="res://scenes/game_objects/wizard_enemy/wizard_enemy.png" id="10_2ll35"]
@@ -123,7 +124,7 @@ libraries = {
 autoplay = "walk"
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_atyjy")]
-max_health = 20.0
+max_health = 18.0
 
 [node name="VelocityComponent" parent="." instance=ExtResource("4_ryqpw")]
 max_speed = 80.0
@@ -138,6 +139,8 @@ health_component = NodePath("../HealthComponent")
 drop_percent = 0.05
 vial_scene = ExtResource("6_t6h2s")
 health_component = NodePath("../HealthComponent")
+
+[node name="CleanerComponent" parent="." instance=ExtResource("7_oepa0")]
 
 [node name="DeathComponent" parent="." node_paths=PackedStringArray("healt_component", "sprite") instance=ExtResource("7_hg0lj")]
 healt_component = NodePath("../HealthComponent")
