@@ -6,6 +6,7 @@ extends Node
 
 @onready var timer = $Timer
 
+const MAX_ENTITIES = 800
 const SPAWN_RADIUS = 350
 var current_difficulty: int = 0
 
@@ -22,6 +23,9 @@ func _ready():
 	
 func spawn_enemy():
 	timer.start()
+	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
+	if entities_layer.get_child_count() >= MAX_ENTITIES: # TODO: COnsider changing spawn rate instead
+		return
 	
 	var spawn_position = get_spawn_position()
 	if spawn_position == null:
@@ -30,8 +34,8 @@ func spawn_enemy():
 	var enemy_scene : PackedScene = enemy_table.pick_item()
 	var enemy = enemy_scene.instantiate() as Node2D
 	
-	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
 	entities_layer.add_child(enemy) # parent is main
+	print()
 	enemy.global_position = spawn_position
 	update_enemy_speed(enemy)
 
@@ -56,7 +60,7 @@ func update_enemy_speed(enemy):
 func on_new_difficulty(difficulty: int):
 	current_difficulty = difficulty
 	var time_reduction = 0.025 * min(difficulty, 32) + 0.01 * max(0, difficulty - 30)
-	timer.wait_time = max(0.02, base_spawn_time -time_reduction)
+	timer.wait_time = max(0.04, base_spawn_time -time_reduction)
 	if difficulty == 12:
 		enemy_table.add_item(wizard_enemy_scene, 20)
 	

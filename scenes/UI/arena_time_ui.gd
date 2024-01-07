@@ -6,7 +6,7 @@ extends CanvasLayer
 func _process(delta):
 	if arena_time_manager == null:
 		return
-	var time_left = arena_time_manager.get_time_left()
+	var time_left = arena_time_manager.get_time_to_print()
 	label.text = format_seconds_to_str(time_left)
 	if time_left < 11:
 		label.add_theme_font_size_override("font_size", 24)
