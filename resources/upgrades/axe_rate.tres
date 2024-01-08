@@ -7,5 +7,5 @@ script = ExtResource("1_7urav")
 id = "axe_rate"
 parent_id = "axe"
 max_quantity = 5
-name = "Axe Quickness"
+name = "Axe Rate"
 description = "Increases axe attack rate by 10%."
