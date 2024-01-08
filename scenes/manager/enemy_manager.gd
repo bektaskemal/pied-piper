@@ -42,7 +42,9 @@ func get_spawn_position():
 	if player == null:
 		return
 	
-	var random_dir = Vector2.RIGHT.rotated(randf_range(0, TAU))
+	var player_dir = player.velocity.normalized()
+	var random_dir = player_dir.rotated(randf_range(-3*PI/5, 3*PI/5)) if player_dir != Vector2.ZERO\
+	 else Vector2.RIGHT.rotated(randf_range(0, TAU))
 	for i in 4:
 		var spawn_position = player.global_position + (random_dir  * SPAWN_RADIUS)
 		var ray_params = PhysicsRayQueryParameters2D.create(player.global_position, spawn_position, 1) # got from collision mask terrain(1)

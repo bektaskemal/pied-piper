@@ -128,7 +128,7 @@ max_health = 18.0
 
 [node name="VelocityComponent" parent="." instance=ExtResource("4_ryqpw")]
 max_speed = 80.0
-acceleration = 2.0
+acceleration = 5.0
 
 [node name="XPVialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_mn6hj")]
 drop_percent = 0.45
