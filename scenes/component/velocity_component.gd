@@ -15,7 +15,7 @@ func accelerate_to_player(delta: float):
 		return
 		
 	# TODO: Add lookahead using player.velocity to increase difficulty
-	var direction = (player.global_position - owner_node.global_position).normalized() 
+	var direction = owner_node.global_position.direction_to(player.global_position)
 	accelerate_in_dir(direction, delta)
 	
 

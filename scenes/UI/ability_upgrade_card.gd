@@ -3,8 +3,10 @@ class_name AbilityUpgradeCard
 
 signal selected
 
-@onready var name_label = $VBoxContainer/NameLabel as Label
+@onready var name_label = $VBoxContainer/MarginContainer/NameLabel as Label
 @onready var desc_label = $VBoxContainer/DescriptionLabel as Label
+
+const PANEL_HOVER_TEXTURE = preload("res://resources/theme/panel_hover_texture.tres")
 
 func _ready():
 	gui_input.connect(on_selected)
@@ -20,10 +22,9 @@ func on_selected(event: InputEvent):
 		selected.emit()
 		
 func on_mouse_entered():
-	var style:StyleBoxFlat = StyleBoxFlat.new()
-	style.bg_color =  Color.AZURE
-	style.bg_color.a = 0.5
+	var style = PANEL_HOVER_TEXTURE
 	add_theme_stylebox_override ("panel", style)
+	
 	
 func on_mouse_exited():
 	remove_theme_stylebox_override("panel")

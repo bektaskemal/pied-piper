@@ -47,7 +47,8 @@ func get_spawn_position():
 	 else Vector2.RIGHT.rotated(randf_range(0, TAU))
 	for i in 4:
 		var spawn_position = player.global_position + (random_dir  * SPAWN_RADIUS)
-		var ray_params = PhysicsRayQueryParameters2D.create(player.global_position, spawn_position, 1) # got from collision mask terrain(1)
+		var raycast_position = spawn_position + (random_dir  * 5) # TODO: Should be radius of collision shape
+		var ray_params = PhysicsRayQueryParameters2D.create(player.global_position, raycast_position, 1) # got from collision mask terrain(1)
 		var collision = get_tree().root.world_2d.direct_space_state.intersect_ray(ray_params)
 		if collision.is_empty():
 			return spawn_position
