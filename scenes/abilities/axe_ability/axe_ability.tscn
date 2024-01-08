@@ -57,6 +57,7 @@ autoplay = "default"
 texture = ExtResource("1_fxh6d")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_ntbbp")]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_aqpu3")

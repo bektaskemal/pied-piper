@@ -138,6 +138,7 @@ texture = ExtResource("1_v7fyd")
 offset = Vector2(0, -4)
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_tk703")]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(15, 0)

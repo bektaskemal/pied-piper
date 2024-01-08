@@ -5,7 +5,7 @@ extends Node
 
 var velocity = Vector2.ZERO
 
-func accelerate_to_player():
+func accelerate_to_player(delta: float):
 	var owner_node = owner as Node2D
 	if owner_node == null:
 		return
@@ -14,13 +14,14 @@ func accelerate_to_player():
 	if player == null:
 		return
 		
-	var direction = (player.global_position - owner_node.global_position).normalized()
-	accelerate_in_dir(direction)
+	# TODO: Add lookahead using player.velocity to increase difficulty
+	var direction = (player.global_position - owner_node.global_position).normalized() 
+	accelerate_in_dir(direction, delta)
 	
 
-func accelerate_in_dir(direction: Vector2):
+func accelerate_in_dir(direction: Vector2, delta: float):
 	var desired_velocity = direction * max_speed
-	velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration* get_process_delta_time()))
+	velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration * delta))
 
 func move(character: CharacterBody2D):
 	character.velocity = velocity
