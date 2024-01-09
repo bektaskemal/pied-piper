@@ -14,6 +14,8 @@ var endless_mode: bool = false
 
 func _ready():
 	timer.timeout.connect(on_victory)
+	if OS.has_feature("web"):
+		timer.start(timer.wait_time*5/6)
 
 func _process(delta):
 	if (timer.wait_time - timer.time_left) >= next_time_target:

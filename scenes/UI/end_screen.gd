@@ -16,6 +16,7 @@ func _ready():
 	%EndlessButton.pressed.connect(on_endless)
 	%QuitButton.pressed.connect(on_quit)
 	if OS.has_feature("web"):
+		%EndlessButton.visible = false
 		%QuitButton.visible = false
 		
 	
