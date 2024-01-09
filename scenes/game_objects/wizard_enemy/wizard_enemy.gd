@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var speed_increment: float = 1.5
 @export var max_speed: float = 110
 
-func _physics_process(delta):
+func _process(delta):
 	velocity_component.accelerate_to_player(delta)
 	velocity_component.move(self)
 	
