@@ -11,13 +11,14 @@ var max_damage
 var base_wait_time 
 
 func _ready():
-	timer.timeout.connect(on_timeout)
+	timer.timeout.connect(spawn)
 	base_wait_time = timer.wait_time
 	min_damage = base_min_damage
 	max_damage = base_max_damage
 	GameEvents.ability_upgrade_added.connect(on_ability_upgraded)
+	spawn()
 	
-func on_timeout():
+func spawn():
 	var player = get_tree().get_first_node_in_group("player") as Player
 	if player == null:
 		return
@@ -39,6 +40,7 @@ func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
 		var percent_reduction = min(0.9, current_upgrades["axe_rate"]["quantity"] * .1)
 		timer.wait_time = base_wait_time * (1 - percent_reduction)
 		timer.start() # reset
+		spawn()
 		return
 	
 	if upgrade.id == "axe_damage":

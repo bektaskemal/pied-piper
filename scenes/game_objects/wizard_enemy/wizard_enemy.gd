@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var velocity_component = $VelocityComponent
 
 @export var speed: float = 70
-@export var speed_increment: float = 2
+@export var speed_increment: float = 1.5
 @export var max_speed: float = 110
 
 func _physics_process(delta):
