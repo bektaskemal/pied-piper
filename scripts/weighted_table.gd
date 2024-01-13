@@ -3,7 +3,7 @@ class_name WeightedTable
 var items: Array[Dictionary] = []
 var weight_sum: int = 0
 
-func add_item(item, weight: int):
+func add_item(item, weight: int = 1):
 	assert(weight > 0)
 	items.append({"item": item, "weight": weight})
 	weight_sum += weight

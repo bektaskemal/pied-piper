@@ -40,7 +40,6 @@ func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
 		var percent_reduction = min(0.9, current_upgrades["axe_rate"]["quantity"] * .1)
 		timer.wait_time = base_wait_time * (1 - percent_reduction)
 		timer.start() # reset
-		spawn()
 		return
 	
 	if upgrade.id == "axe_damage":

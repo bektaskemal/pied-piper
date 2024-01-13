@@ -9,8 +9,7 @@ extends CharacterBody2D
 @export var max_speed: float = 96
 
 func _process(delta):
-	velocity_component.accelerate_to_player(delta)
-	velocity_component.move(self)
+	velocity_component.move(self, delta)
 	
 	if velocity != Vector2.ZERO:
 		var x_dir = sign(velocity.x)

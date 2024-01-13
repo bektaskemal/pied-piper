@@ -8,18 +8,21 @@ extends Node
 
 
 const SPAWN_RADIUS = 350
-const MAX_SPAWN_RATE = 25.0
+const MAX_SPAWN_RATE = 20.0
+const WIZARD_ENEMY_WEIGHT = 2
 var current_difficulty: int = 0
 
-var spawn_rate_increment = 0.15
+var spawn_rate_increment = 0.2
+var base_spawn_rate: float
 var spawn_rate: float
 var enemy_table = WeightedTable.new()
 
 
 func _ready():
-	enemy_table.add_item(basic_enemy_scene, 10)
+	enemy_table.add_item(basic_enemy_scene)
 	timer.timeout.connect(spawn_enemy)
 	arena_time_manager.arena_difficulty_inreased.connect(on_new_difficulty)
+	base_spawn_rate = 1/timer.wait_time
 	spawn_rate = 1/timer.wait_time
 	
 func spawn_enemy():
@@ -60,12 +63,15 @@ func update_enemy_speed(enemy):
 	if current_difficulty < 48 else 1.1 * enemy.max_speed)) #Endless mode TODO: Handle better
 
 func update_spawn_rate(difficulty: float):
-	spawn_rate_increment = 0.15 + floor(difficulty / 12) * 0.1
-	spawn_rate = min(spawn_rate + spawn_rate_increment, 20)
+	spawn_rate = min(base_spawn_rate + difficulty * spawn_rate_increment, MAX_SPAWN_RATE)
 
 func on_new_difficulty(difficulty: int):
 	if difficulty == 16:
-		enemy_table.add_item(wizard_enemy_scene, 20)
+		enemy_table.add_item(wizard_enemy_scene, WIZARD_ENEMY_WEIGHT)
+	elif difficulty == 24:
+		var new_increment = 0.33
+		base_spawn_rate -= current_difficulty*(new_increment - spawn_rate_increment)
+		spawn_rate_increment = new_increment
 
 	current_difficulty = difficulty
 	update_spawn_rate(difficulty)

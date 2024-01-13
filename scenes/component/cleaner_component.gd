@@ -2,10 +2,10 @@ extends Node
 
 @onready var timer = $Timer
 
-@export var clean_time: float = 30
-@export var check_time_after_first: float = 15
+@export var clean_time: float = 25
+@export var check_time_after_first: float = 10
 
-const CLEAN_DISTANCE = 360
+const CLEAN_DISTANCE = 340
 
 func _ready():
 	timer.timeout.connect(on_timeout)
