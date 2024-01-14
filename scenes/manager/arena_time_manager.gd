@@ -35,3 +35,4 @@ func on_victory():
 	var victory_screen = end_screen_scene.instantiate()
 	add_child(victory_screen)
 	victory_screen.endless_mode.connect(on_endless_mode)
+	victory_screen.play_jingle(victory_screen.RESULT.VICTORY)

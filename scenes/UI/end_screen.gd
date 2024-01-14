@@ -4,6 +4,9 @@ extends CanvasLayer
 
 signal endless_mode
 
+enum RESULT {VICTORY, DEFEAT}
+
+
 func _ready():
 	panel_container.pivot_offset = panel_container.size / 2
 	var tween = create_tween()
@@ -24,7 +27,14 @@ func set_defeat():
 	%TitleLabel.text = "DEFEAT"
 	%DescriptionLabel.text = "You lost!"
 	%EndlessButton.visible = false
+	play_jingle(RESULT.DEFEAT)
 	
+func play_jingle(result: RESULT):
+	if result == RESULT.DEFEAT:
+		$DefeatAudioPlayer.play()
+	else:
+		$VictoryAudioPlayer.play()
+
 func on_restart():
 	$AnimationPlayer.play("out")
 	await $AnimationPlayer.animation_finished

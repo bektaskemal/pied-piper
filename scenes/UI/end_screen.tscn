@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdweu5krj5qyn"]
+[gd_scene load_steps=8 format=3 uid="uid://cdweu5krj5qyn"]
 
 [ext_resource type="Script" path="res://scenes/UI/end_screen.gd" id="1_mt45h"]
+[ext_resource type="AudioStream" uid="uid://chtx56ow7v0b0" path="res://assets/audio/jingles_defeat.ogg" id="2_l6n6g"]
+[ext_resource type="AudioStream" uid="uid://q8f2c05qfoyy" path="res://assets/audio/jingles_victory.ogg" id="3_j2hbj"]
 
 [sub_resource type="Animation" id="Animation_v1w7j"]
 length = 0.001
@@ -139,3 +141,12 @@ text = "Endless Mode"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
+
+[node name="DefeatAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_l6n6g")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="VictoryAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_j2hbj")
+volume_db = -5.0

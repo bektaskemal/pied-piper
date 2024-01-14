@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://f18mif5mqetj"]
+
+[ext_resource type="AudioStream" uid="uid://b58s30aknuxhm" path="res://assets/audio/a-little-bird-shows-the-way.wav" id="1_lbsty"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_lbsty")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
