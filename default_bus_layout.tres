@@ -1,4 +1,7 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://dubjs00j6lieu"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://dubjs00j6lieu"]
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_8sw6g"]
+resource_name = "PitchShift"
 
 [resource]
 bus/1/name = &"SFX"
@@ -13,3 +16,5 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectPitchShift_8sw6g")
+bus/2/effect/0/enabled = true

@@ -1,8 +1,6 @@
 extends Node
 class_name ArenaTimeManager
 
-signal arena_difficulty_inreased(difficulty: int)
-
 @export var end_screen_scene: PackedScene
 
 @onready var timer = $Timer as Timer
@@ -14,14 +12,14 @@ var endless_mode: bool = false
 
 func _ready():
 	timer.timeout.connect(on_victory)
-	#if OS.has_feature("web"):
-		#timer.start(timer.wait_time*5/6)
+	GameEvents.difficulty_changed.emit(arena_difficulty)
+	
 
 func _process(delta):
 	if (timer.wait_time - timer.time_left) >= next_time_target:
 		next_time_target += DIFFICULTY_INTERVAL
 		arena_difficulty += 1
-		arena_difficulty_inreased.emit(arena_difficulty)
+		GameEvents.difficulty_changed.emit(arena_difficulty)
 
 func on_endless_mode():
 	endless_mode = true

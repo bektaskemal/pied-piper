@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://bpbvmmyxq3bs1" path="res://resources/tileset.tres" id="1_caept"]
 [ext_resource type="Script" path="res://scenes/UI/main_menu.gd" id="1_l2ekq"]
-[ext_resource type="Texture2D" uid="uid://dgcelw7cn0vmt" path="res://assets/piper.png" id="3_ceqdi"]
+[ext_resource type="Texture2D" uid="uid://xi6dl78fblle" path="res://assets/piper.png" id="3_ceqdi"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_l2ekq")

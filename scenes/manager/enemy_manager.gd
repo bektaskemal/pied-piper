@@ -2,7 +2,6 @@ extends Node
 
 @export var basic_enemy_scene: PackedScene
 @export var wizard_enemy_scene: PackedScene
-@export var arena_time_manager: ArenaTimeManager
 
 @onready var timer = $Timer
 
@@ -21,7 +20,7 @@ var enemy_table = WeightedTable.new()
 func _ready():
 	enemy_table.add_item(basic_enemy_scene)
 	timer.timeout.connect(spawn_enemy)
-	arena_time_manager.arena_difficulty_inreased.connect(on_new_difficulty)
+	GameEvents.difficulty_changed.connect(on_new_difficulty)
 	base_spawn_rate = 1/timer.wait_time
 	spawn_rate = 1/timer.wait_time
 	
