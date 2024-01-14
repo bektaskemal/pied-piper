@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvhud3fband4r"]
+[gd_scene load_steps=18 format=3 uid="uid://dvhud3fband4r"]
 
 [ext_resource type="Texture2D" uid="uid://dp32duuqu4emf" path="res://scenes/game_objects/player/player.png" id="1_0ooxu"]
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_4k4ng"]
 [ext_resource type="PackedScene" uid="uid://bjs5xabw88l1c" path="res://scenes/component/health_component.tscn" id="2_y2gj3"]
 [ext_resource type="PackedScene" uid="uid://yb3agepfwuii" path="res://scenes/component/player_hit_flash.tscn" id="3_cafx5"]
 [ext_resource type="PackedScene" uid="uid://doh2qecs110l4" path="res://scenes/abilities/sword_ability_controller/sword_ability_controller.tscn" id="3_gmyng"]
+[ext_resource type="PackedScene" uid="uid://whrsootsiypi" path="res://scenes/component/random_stream_player_2d.tscn" id="4_bqaqr"]
 [ext_resource type="Shader" path="res://scenes/component/player_hit_flash.gdshader" id="5_2iqj4"]
+[ext_resource type="AudioStream" uid="uid://daxkur7wng7a2" path="res://assets/audio/player_hurt_3.wav" id="5_7y3b3"]
 
 [sub_resource type="Animation" id="Animation_kkfxq"]
 length = 0.001
@@ -150,6 +152,9 @@ libraries = {
 [node name="Abilities" type="Node" parent="."]
 
 [node name="SwordAbilityController" parent="Abilities" instance=ExtResource("3_gmyng")]
+
+[node name="HurtAudioPlayer" parent="." instance=ExtResource("4_bqaqr")]
+streams = Array[AudioStream]([ExtResource("5_7y3b3")])
 
 [node name="DamageIntervalTimer" type="Timer" parent="."]
 wait_time = 0.5

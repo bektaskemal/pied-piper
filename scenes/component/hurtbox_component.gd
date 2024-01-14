@@ -2,7 +2,8 @@ extends Area2D
 class_name HurtboxComponent
 
 @export var health_component: HealthComponent
-#@export var dmg_label: PackedScene
+
+signal hit
 
 var dmg_label: PackedScene = preload("res://scenes/UI/floating_text.tscn")
 
@@ -26,6 +27,7 @@ func on_attacked(attacker: Area2D):
 	get_tree().get_first_node_in_group("foreground_layer").add_child(label)
 	label.global_position = global_position + Vector2.UP * 16
 	label.start(str(attacker_hitbox.damage), max_scale)
+	hit.emit()
 		
 	
 	

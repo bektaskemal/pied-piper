@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ygjxmlk5li0v"]
+[gd_scene load_steps=25 format=3 uid="uid://ygjxmlk5li0v"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/basic_enemy/basic_enemy.gd" id="1_s01u8"]
 [ext_resource type="Texture2D" uid="uid://bose75qjfauwd" path="res://scenes/game_objects/basic_enemy/basic_enemy.png" id="2_jn2e7"]
@@ -12,6 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://xdsfaaiij8cy" path="res://scenes/component/cleaner_component.tscn" id="7_sqvvn"]
 [ext_resource type="Shader" path="res://scenes/component/hit_flash_component.gdshader" id="10_0akgh"]
 [ext_resource type="PackedScene" uid="uid://bw03xkne4w8j" path="res://scenes/component/hit_flash_component.tscn" id="10_l31y0"]
+[ext_resource type="PackedScene" uid="uid://whrsootsiypi" path="res://scenes/component/random_stream_player_2d.tscn" id="13_gefgl"]
+[ext_resource type="AudioStream" uid="uid://c5ffvna2n5llf" path="res://assets/audio/footstep_carpet_000.ogg" id="13_mnkcf"]
+[ext_resource type="AudioStream" uid="uid://p0w87xdw3kqc" path="res://assets/audio/footstep_carpet_001.ogg" id="15_wuvy6"]
+[ext_resource type="AudioStream" uid="uid://bk2v57ndr5ylo" path="res://assets/audio/footstep_carpet_002.ogg" id="16_m013y"]
+[ext_resource type="AudioStream" uid="uid://cy40xii8pm3u5" path="res://assets/audio/footstep_carpet_003.ogg" id="17_rxuoi"]
+[ext_resource type="AudioStream" uid="uid://b7in1maoki4mu" path="res://assets/audio/footstep_carpet_004.ogg" id="18_vdwaw"]
 
 [sub_resource type="Animation" id="Animation_8yedr"]
 length = 0.001
@@ -131,6 +137,9 @@ shape = SubResource("CircleShape2D_tocgt")
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
 hit_flash_material = SubResource("ShaderMaterial_qswps")
+
+[node name="RandomStreamPlayer2D" parent="." instance=ExtResource("13_gefgl")]
+streams = Array[AudioStream]([ExtResource("13_mnkcf"), ExtResource("15_wuvy6"), ExtResource("16_m013y"), ExtResource("17_rxuoi"), ExtResource("18_vdwaw")])
 
 [node name="Visuals" type="Node2D" parent="."]
 

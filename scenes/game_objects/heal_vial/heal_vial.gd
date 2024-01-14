@@ -35,3 +35,5 @@ func pickup(pickup_area: Area2D):
 	tween.tween_property(sprite, "scale", Vector2.ZERO, .08).set_delay(0.42)
 	tween.chain()
 	tween.tween_callback(collect)
+	
+	$RandomStreamPlayer2D.play_random()

@@ -48,6 +48,7 @@ func check_deal_damage():
 	if number_of_colliding_bodies == 0:
 		return
 	health_component.damage(min(number_of_colliding_bodies,4))
+	$HurtAudioPlayer.play_random()
 	dmg_timer.start()
 
 func on_body_entered(body: Node2D):

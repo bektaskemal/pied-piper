@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs5ayku11wvwd"]
+[gd_scene load_steps=6 format=3 uid="uid://cs5ayku11wvwd"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/heal_vial/heal_vial.gd" id="1_etxxb"]
 [ext_resource type="Texture2D" uid="uid://cerv6evkb05mc" path="res://scenes/game_objects/heal_vial/heal_vial.png" id="2_rl3o7"]
+[ext_resource type="PackedScene" uid="uid://whrsootsiypi" path="res://scenes/component/random_stream_player_2d.tscn" id="3_wqja1"]
+[ext_resource type="AudioStream" uid="uid://dxt5tp64o3rpw" path="res://assets/audio/heal_2.wav" id="5_wos8q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tqxsy"]
 radius = 16.0
@@ -19,3 +21,6 @@ shape = SubResource("CircleShape2D_tqxsy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_rl3o7")
+
+[node name="RandomStreamPlayer2D" parent="." instance=ExtResource("3_wqja1")]
+streams = Array[AudioStream]([ExtResource("5_wos8q")])

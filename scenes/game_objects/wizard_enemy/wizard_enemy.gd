@@ -8,6 +8,9 @@ extends CharacterBody2D
 @export var speed_increment: float = 1.5
 @export var max_speed: float = 110
 
+func _ready():
+	$HurtboxComponent.hit.connect(on_hit)
+
 func _process(delta):
 	velocity_component.move(self, delta)
 	
@@ -20,3 +23,6 @@ func set_speed(new_speed: float):
 	speed = new_speed
 	velocity_component.max_speed = speed
 	animation_player.speed_scale = speed/80
+
+func on_hit():
+	$RandomStreamPlayer2D.play_random()
