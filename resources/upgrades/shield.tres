@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://oj5ee34brh6b"]
+
+[ext_resource type="Script" path="res://resources/upgrades/ability_upgrade.gd" id="1_n4jlk"]
+
+[resource]
+script = ExtResource("1_n4jlk")
+id = "shield"
+parent_id = ""
+max_quantity = 1
+name = "Shield"
+description = "A magical shield blocking damages every 15 s"

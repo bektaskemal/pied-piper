@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://kw354v654xgu"]
+
+[ext_resource type="Script" path="res://resources/upgrades/ability_upgrade.gd" id="1_jobut"]
+
+[resource]
+script = ExtResource("1_jobut")
+id = "shield_rate"
+parent_id = "shield"
+max_quantity = 10
+name = "Shield Cooldown"
+description = "Reduce cooldown of the shield by 1 s"

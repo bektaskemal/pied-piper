@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dvhud3fband4r"]
+[gd_scene load_steps=19 format=3 uid="uid://dvhud3fband4r"]
 
 [ext_resource type="Texture2D" uid="uid://dp32duuqu4emf" path="res://scenes/game_objects/player/player.png" id="1_0ooxu"]
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_4k4ng"]
@@ -131,6 +131,8 @@ shader_parameter/color = Vector3(1, 1, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_yub0n"]
 radius = 32.0
 
+[sub_resource type="SphereMesh" id="SphereMesh_cng6q"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_5px35"]
 radius = 7.0
 
@@ -178,6 +180,9 @@ health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
 hit_flash_material = SubResource("ShaderMaterial_vfl1a")
 
+[node name="ShieldTimer" type="Timer" parent="."]
+wait_time = 15.0
+
 [node name="PickupArea2D" type="Area2D" parent="."]
 visible = false
 collision_layer = 16
@@ -193,6 +198,13 @@ shape = SubResource("CircleShape2D_yub0n")
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 texture = ExtResource("1_0ooxu")
 offset = Vector2(0, -8)
+
+[node name="Shield" type="MeshInstance2D" parent="Visuals/Sprite2D"]
+modulate = Color(0.490196, 0.619608, 0.796078, 0.509804)
+show_behind_parent = true
+position = Vector2(0, -7)
+scale = Vector2(22, 22)
+mesh = SubResource("SphereMesh_cng6q")
 
 [node name="CollisionArea2D" type="Area2D" parent="."]
 visible = false

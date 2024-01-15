@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0kxjmo8htbal"]
+[gd_scene load_steps=11 format=3 uid="uid://d0kxjmo8htbal"]
 
 [ext_resource type="Script" path="res://scenes/manager/upgrade_manager.gd" id="1_5tvyf"]
 [ext_resource type="Resource" uid="uid://uli2uvjjdvj" path="res://resources/upgrades/sword_rate.tres" id="2_6sho2"]
@@ -8,8 +8,10 @@
 [ext_resource type="Resource" uid="uid://duqnjcxraij5r" path="res://resources/upgrades/speed.tres" id="5_vanc6"]
 [ext_resource type="Resource" uid="uid://c4spim2bceng3" path="res://resources/upgrades/sword_damage.tres" id="6_0ij4n"]
 [ext_resource type="Resource" uid="uid://chdjk4xc06tsv" path="res://resources/upgrades/axe_damage.tres" id="7_jhao4"]
+[ext_resource type="Resource" uid="uid://oj5ee34brh6b" path="res://resources/upgrades/shield.tres" id="8_3oqeo"]
+[ext_resource type="Resource" uid="uid://kw354v654xgu" path="res://resources/upgrades/shield_rate.tres" id="9_nhl7k"]
 
 [node name="UpgradeManager" type="Node"]
 script = ExtResource("1_5tvyf")
-upgrade_pool = Array[Resource("res://resources/upgrades/ability_upgrade.gd")]([ExtResource("2_6sho2"), ExtResource("3_dayt4"), ExtResource("4_0jb04"), ExtResource("5_vanc6"), ExtResource("6_0ij4n"), ExtResource("7_jhao4")])
+upgrade_pool = Array[Resource("res://resources/upgrades/ability_upgrade.gd")]([ExtResource("2_6sho2"), ExtResource("3_dayt4"), ExtResource("4_0jb04"), ExtResource("5_vanc6"), ExtResource("6_0ij4n"), ExtResource("7_jhao4"), ExtResource("8_3oqeo"), ExtResource("9_nhl7k")])
 upgrade_screen_scene = ExtResource("3_sf6aj")
