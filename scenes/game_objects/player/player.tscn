@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dvhud3fband4r"]
+[gd_scene load_steps=22 format=3 uid="uid://dvhud3fband4r"]
 
 [ext_resource type="Texture2D" uid="uid://dp32duuqu4emf" path="res://scenes/game_objects/player/player.png" id="1_0ooxu"]
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_4k4ng"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://whrsootsiypi" path="res://scenes/component/random_stream_player_2d.tscn" id="4_bqaqr"]
 [ext_resource type="Shader" path="res://scenes/component/player_hit_flash.gdshader" id="5_2iqj4"]
 [ext_resource type="AudioStream" uid="uid://daxkur7wng7a2" path="res://assets/audio/player_hurt_3.wav" id="5_7y3b3"]
+[ext_resource type="Script" path="res://scenes/component/shield_audio_player.gd" id="6_ach3d"]
+[ext_resource type="AudioStream" uid="uid://yhfahg8nf8ri" path="res://assets/audio/shield_up.wav" id="7_ftle0"]
+[ext_resource type="AudioStream" uid="uid://cr34i670mva6s" path="res://assets/audio/shield_down.wav" id="8_1vk2w"]
 
 [sub_resource type="Animation" id="Animation_kkfxq"]
 length = 0.001
@@ -158,8 +161,19 @@ libraries = {
 [node name="HurtAudioPlayer" parent="." instance=ExtResource("4_bqaqr")]
 streams = Array[AudioStream]([ExtResource("5_7y3b3")])
 
+[node name="ShieldAudioPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -8.0
+bus = &"SFX"
+script = ExtResource("6_ach3d")
+shield_up_stream = ExtResource("7_ftle0")
+shield_down_stream = ExtResource("8_1vk2w")
+
 [node name="DamageIntervalTimer" type="Timer" parent="."]
 wait_time = 0.5
+one_shot = true
+
+[node name="ShieldTimer" type="Timer" parent="."]
+wait_time = 15.0
 one_shot = true
 
 [node name="HealthBar" type="ProgressBar" parent="."]
@@ -179,9 +193,6 @@ show_percentage = false
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
 hit_flash_material = SubResource("ShaderMaterial_vfl1a")
-
-[node name="ShieldTimer" type="Timer" parent="."]
-wait_time = 15.0
 
 [node name="PickupArea2D" type="Area2D" parent="."]
 visible = false

@@ -9,6 +9,7 @@ class_name Player
 @onready var animation_player = $AnimationPlayer as AnimationPlayer
 @onready var visuals = $Visuals as Node2D
 @onready var shield: MeshInstance2D = $Visuals/Sprite2D/Shield
+@onready var shield_audio_player = $ShieldAudioPlayer
 
 const ACCELERATION = 20
 const SPEED_INCREMENT = 5
@@ -58,6 +59,7 @@ func check_deal_damage():
 		return
 	if has_shield:
 		has_shield = false
+		shield_audio_player.play_shield_down()
 		$ShieldTimer.start()
 		return
 	health_component.damage(min(number_of_colliding_bodies,4))
@@ -83,7 +85,7 @@ func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
 		return
 		
 	if upgrade.id == "shield":
-		has_shield = true
+		enable_shield()
 		return
 	if upgrade.id == "shield_rate":
 		$ShieldTimer.wait_time -= 1
@@ -94,3 +96,4 @@ func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
 
 func enable_shield():
 	has_shield = true
+	shield_audio_player.play_shield_up()
