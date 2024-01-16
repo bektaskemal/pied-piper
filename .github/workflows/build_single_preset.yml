@@ -1,0 +1,65 @@
+name: Build one specific preset
+
+on:
+  # Used when triggering this workflow from another workflow
+  workflow_call:
+    inputs:
+      debug-mode:
+        description: "Whether to export the preset in debug mode. Defaults to true"
+        required: false
+        type: boolean
+        default: true
+      export-file-name:
+        description: "Name of the file that will be generated from the export"
+        required: false
+        type: string
+        default: ${{ vars.ARTIFACT_NAME }}
+      file-extension:
+        description: "Extension to export to"
+        required: true
+        type: string
+      godot-export-preset:
+        description: "Name of the Godot export preset to use to export the project"
+        required: true
+        type: string
+    outputs:
+      artifact-name:
+        description: "Name of the uploaded artifact"
+        value: ${{ jobs.build.outputs.artifact-name }}
+
+env:
+  GODOT_VERSION: 4.2.1
+
+jobs:
+  build:
+    name: ${{ inputs.godot-export-preset }}
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.2.1
+    outputs:
+      artifact-name: ${{ steps.add-artifact-name.outputs.artifact-name }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup
+      run: |
+        mkdir -v -p ~/.local/share/godot/export_templates
+        mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+    - name: Build ${{ inputs.godot-export-preset }}
+      run: |
+        mkdir -v -p build/${{ inputs.godot-export-preset }}
+        godot --headless --verbose --export-release "${{ inputs.godot-export-preset }}" ./build/${{ inputs.godot-export-preset }}/${{ inputs.export-file-name }}.zip
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ vars.ARTIFACT_NAME }}-${{ inputs.godot-export-preset }}-${{ github.sha }}
+        path: ./build/${{ inputs.godot-export-preset }}
+        if-no-files-found: error
+
+    - name: Add artifact name to output
+      id: add-artifact-name
+      run: echo "artifact-name=${{ vars.ARTIFACT_NAME }}-${{ inputs.godot-export-preset }}-${{ github.sha }}" >> "$GITHUB_OUTPUT"

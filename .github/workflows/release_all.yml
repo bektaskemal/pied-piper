@@ -1,0 +1,33 @@
+name: Release an artifact
+
+on:
+  # Used when triggering this workflow from another workflow
+  workflow_call:
+    inputs:
+      web-artifact-name:
+        required: true
+        type: string
+      linux-artifact-name:
+        required: true
+        type: string
+      windows-artifact-name:
+        required: true
+        type: string
+
+jobs:
+  release_all:
+    name: Release all artifacts
+    strategy:
+      matrix:
+        platform:
+          - release-channel: web-production
+            artifact-name: ${{ inputs.web-artifact-name }}
+          - release-channel: linux-production
+            artifact-name: ${{ inputs.linux-artifact-name }}
+          - release-channel: windows-production
+            artifact-name: ${{ inputs.windows-artifact-name }}
+
+    uses: ./.github/workflows/release_single.yml
+    with:
+      release-channel: ${{ matrix.platform.release-channel }}
+      artifact-name: ${{ matrix.platform.artifact-name }}

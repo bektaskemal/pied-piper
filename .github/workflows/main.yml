@@ -1,0 +1,35 @@
+# name: Release to production
+
+# on:
+#   push
+
+# jobs:
+#   build_all:
+#     name: Build
+#     uses: ./.github/workflows/build_all.yml
+#     with:
+#       debug-mode: false
+
+name: Godot Exporter
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  Exporter:
+    runs-on: ubuntu-latest
+    container:
+      image: registry.gitlab.com/greenfox/godot-build-automation:latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Export Godot Project
+      run: |
+        exporter            
+    - name: Deploy To Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
