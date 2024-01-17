@@ -10,24 +10,33 @@ script = ExtResource("1_fq3du")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="NameMarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/MarginContainer"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/NameMarginContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.819608, 0.462745, 0.815686, 1)
 theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
-text = "Test name"
+text = "Upgrade Name"
 horizontal_alignment = 1
 vertical_alignment = 1
+max_lines_visible = 2
 
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+[node name="DescMarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/DescMarginContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Write some description"
 horizontal_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 3

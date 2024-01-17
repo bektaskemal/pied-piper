@@ -3,8 +3,8 @@ class_name AbilityUpgradeCard
 
 signal selected
 
-@onready var name_label = $VBoxContainer/MarginContainer/NameLabel as Label
-@onready var desc_label = $VBoxContainer/DescriptionLabel as Label
+@onready var name_label = $VBoxContainer/NameMarginContainer/NameLabel as Label
+@onready var desc_label = $VBoxContainer/DescMarginContainer/DescriptionLabel as Label
 
 const PANEL_HOVER_TEXTURE = preload("res://resources/theme/panel_hover_texture.tres")
 
