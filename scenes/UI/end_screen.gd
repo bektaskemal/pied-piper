@@ -16,6 +16,7 @@ func _ready():
 	
 	get_tree().paused = true
 	%RestartButton.pressed.connect(on_restart)
+	%RestartButton.grab_focus()
 	%EndlessButton.pressed.connect(on_endless)
 	%QuitButton.pressed.connect(on_quit)
 	if OS.has_feature("web"):

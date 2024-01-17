@@ -3,6 +3,7 @@ extends CanvasLayer
 var pressed = false
 
 func _ready():
+	%PlayButton.grab_focus()
 	%PlayButton.pressed.connect(on_play_pressed)
 	%QuitButton.pressed.connect(on_quit_pressed)
 	if OS.has_feature("web"):
