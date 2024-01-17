@@ -4,6 +4,7 @@ signal exp_vial_collected(value: float)
 signal heal_vial_collected(value: float)
 signal ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary)
 signal difficulty_changed(value: float)
+signal endless_mode
 
 func emit_exp_vial_collected(value: float):
 	exp_vial_collected.emit(value)
@@ -16,4 +17,8 @@ func emit_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dicti
 
 func emit_difficulty_changed(value: float):
 	difficulty_changed.emit(value)
+	
+func emit_endless_mode():
+	endless_mode.emit()
+
 	

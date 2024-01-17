@@ -58,8 +58,7 @@ func get_spawn_position():
 			random_dir = random_dir.rotated(PI/2)
 
 func update_enemy_speed(enemy):
-	enemy.set_speed(min(enemy.speed + current_difficulty * enemy.speed_increment, enemy.max_speed\
-	if current_difficulty < 48 else 1.1 * enemy.max_speed)) #Endless mode TODO: Handle better
+	enemy.set_speed_level(current_difficulty)
 
 func update_spawn_rate(difficulty: float):
 	spawn_rate = min(base_spawn_rate + difficulty * spawn_rate_increment, MAX_SPAWN_RATE)

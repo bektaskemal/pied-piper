@@ -47,7 +47,7 @@ func on_endless():
 	$AnimationPlayer.play("out")
 	await $AnimationPlayer.animation_finished
 	get_tree().paused = false
-	endless_mode.emit()
+	GameEvents.emit_endless_mode()
 	queue_free()
 	
 func on_quit():

@@ -13,6 +13,7 @@ var endless_mode: bool = false
 func _ready():
 	timer.timeout.connect(on_victory)
 	GameEvents.difficulty_changed.emit(arena_difficulty)
+	GameEvents.endless_mode.connect(on_endless_mode)
 	
 
 func _process(delta):
@@ -23,7 +24,7 @@ func _process(delta):
 
 func on_endless_mode():
 	endless_mode = true
-	timer.start(600)
+	timer.start(900)
 	next_time_target = DIFFICULTY_INTERVAL
 
 func get_time_to_print():
@@ -32,5 +33,4 @@ func get_time_to_print():
 func on_victory():
 	var victory_screen = end_screen_scene.instantiate()
 	add_child(victory_screen)
-	victory_screen.endless_mode.connect(on_endless_mode)
 	victory_screen.play_jingle(victory_screen.RESULT.VICTORY)

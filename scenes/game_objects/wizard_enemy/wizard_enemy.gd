@@ -4,12 +4,14 @@ extends CharacterBody2D
 @onready var animation_player = $AnimationPlayer
 @onready var velocity_component = $VelocityComponent
 
-@export var speed: float = 70
+@export var base_speed: float = 70
 @export var speed_increment: float = 1.5
 @export var max_speed: float = 110
+@export var endless_mode_max_speed: float = 120
 
 func _ready():
 	$HurtboxComponent.hit.connect(on_hit)
+	GameEvents.endless_mode.connect(on_endless_mode)
 
 func _process(delta):
 	velocity_component.move(self, delta)
@@ -19,10 +21,12 @@ func _process(delta):
 		if x_dir != 0:
 			visuals.scale.x = x_dir
 
-func set_speed(new_speed: float):
-	speed = new_speed
-	velocity_component.max_speed = speed
-	animation_player.speed_scale = speed/80
+func set_speed_level(level: int):
+	velocity_component.max_speed = min(base_speed + level * speed_increment, max_speed)
+	animation_player.speed_scale = velocity_component.max_speed/80
+
+func on_endless_mode():
+	max_speed = endless_mode_max_speed
 
 func on_hit():
 	$RandomStreamPlayer2D.play_random()
