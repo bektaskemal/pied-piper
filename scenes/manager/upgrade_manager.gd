@@ -3,7 +3,7 @@ extends Node
 @export var upgrade_pool: Array[AbilityUpgrade] # TODO: Consider WeightedTable
 @export var experience_manager: ExperienceManager
 @export var upgrade_screen_scene: PackedScene
-
+@export var num_upgrades: int = 3
 var current_upgrades = {}
 
 func _ready():
@@ -30,7 +30,7 @@ func pick_upgrades():
 	var filtered_upgrades = upgrade_pool.duplicate()
 	filtered_upgrades = filtered_upgrades.filter(func(e) : return not filtered_upgrades.any(func(other) : return e != other and e.parent_id == other.id))
 	filtered_upgrades.shuffle()
-	return filtered_upgrades.slice(0,2)
+	return filtered_upgrades.slice(0, num_upgrades)
 		
 
 func on_level_up(level: int):	

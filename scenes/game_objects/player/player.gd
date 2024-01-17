@@ -77,16 +77,22 @@ func on_health_changed(change):
 	health_bar.value = health_component.get_health_percent()
 
 func on_ability_upgraded(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
-	if not upgrade is Ability and not upgrade.id in ["speed", "shield", "shield_rate"]:
+	if not upgrade is Ability and not upgrade.id in ["speed", "shield", "shield_rate", "health"]:
 		return
 		
 	if upgrade.id == "speed":
 		max_speed += SPEED_INCREMENT
 		return
 		
+	if upgrade.id == "health":
+		health_component.max_health += 2
+		health_component.heal(2)
+		return
+		
 	if upgrade.id == "shield":
 		enable_shield()
 		return
+	
 	if upgrade.id == "shield_rate":
 		$ShieldTimer.wait_time -= 1
 		return
