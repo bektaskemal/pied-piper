@@ -173,7 +173,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="ShieldTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 12.0
 one_shot = true
 
 [node name="HealthBar" type="ProgressBar" parent="."]

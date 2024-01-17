@@ -6,6 +6,6 @@
 script = ExtResource("1_jobut")
 id = "shield_rate"
 parent_id = "shield"
-max_quantity = 10
+max_quantity = 7
 name = "Shield Cooldown"
 description = "Reduce cooldown of the shield by 1 s"

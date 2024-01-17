@@ -8,4 +8,4 @@ id = "shield"
 parent_id = ""
 max_quantity = 1
 name = "Shield"
-description = "A magical shield blocking damages every 15 s"
+description = "A magical shield blocking damages every 12 s"
