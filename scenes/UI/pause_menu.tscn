@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdweu5krj5qyn"]
+[gd_scene load_steps=6 format=3 uid="uid://cmrfopx34x651"]
 
-[ext_resource type="Script" path="res://scenes/UI/end_screen.gd" id="1_mt45h"]
-[ext_resource type="AudioStream" uid="uid://chtx56ow7v0b0" path="res://assets/audio/jingles_defeat.ogg" id="2_l6n6g"]
-[ext_resource type="AudioStream" uid="uid://q8f2c05qfoyy" path="res://assets/audio/jingles_victory.ogg" id="3_j2hbj"]
+[ext_resource type="Script" path="res://scenes/UI/pause_menu.gd" id="1_htf7b"]
 
 [sub_resource type="Animation" id="Animation_v1w7j"]
 length = 0.001
@@ -60,9 +58,9 @@ _data = {
 "out": SubResource("Animation_nicla")
 }
 
-[node name="VictoryScreen" type="CanvasLayer"]
+[node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_mt45h")
+script = ExtResource("1_htf7b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -87,64 +85,48 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 140)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
-custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-theme_override_constants/separation = 10
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"BlueOutlineLabel"
-theme_override_colors/font_color = Color(0.819608, 0.462745, 0.815686, 1)
-theme_override_font_sizes/font_size = 48
-text = "VICTORY"
+theme_override_font_sizes/font_size = 32
+text = "Paused"
 horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DescriptionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"BlueOutlineLabel"
-text = "You won!"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="RestartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Restart"
+text = "Resume
+"
 
-[node name="EndlessButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Continue until you die!"
-text = "Endless Mode"
+text = "Options"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Quit"
-
-[node name="DefeatAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_l6n6g")
-volume_db = -5.0
-bus = &"SFX"
-
-[node name="VictoryAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_j2hbj")
-volume_db = -5.0
+text = "Quit to Menu"

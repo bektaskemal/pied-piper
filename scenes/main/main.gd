@@ -2,9 +2,10 @@ extends Node
 
 @export var end_screen_scene: PackedScene
 
+var pause_menu_scene = preload("res://scenes/UI/pause_menu.tscn")
+
 @onready var player = %Player as Player
 
-var focus_out = false
 
 func _ready():
 	randomize()
@@ -15,13 +16,13 @@ func on_died():
 	add_child(defeat_screen)
 	defeat_screen.set_defeat()
 	
+func _unhandled_input(event):
+	if event.is_action_pressed("pause"):
+		add_child(pause_menu_scene.instantiate())
+		get_tree().root.set_input_as_handled()
+	
 func _notification(what):
-	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN || what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
-		if focus_out:
-			focus_out = false
-			get_tree().paused = false
-	elif what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT || what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT || what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		if not get_tree().paused:
-			focus_out = true
-			get_tree().paused = true
+			add_child(pause_menu_scene.instantiate())
 		

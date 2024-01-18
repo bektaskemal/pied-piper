@@ -19,9 +19,8 @@ theme_override_constants/margin_right = 4
 [node name="NameLabel" type="Label" parent="VBoxContainer/NameMarginContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
 theme_override_colors/font_color = Color(0.819608, 0.462745, 0.815686, 1)
-theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
-theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
 text = "Upgrade Name"
 horizontal_alignment = 1
@@ -37,6 +36,7 @@ theme_override_constants/margin_right = 2
 [node name="DescriptionLabel" type="Label" parent="VBoxContainer/DescMarginContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
 text = "Write some description"
 horizontal_alignment = 1
 autowrap_mode = 3

@@ -159,10 +159,11 @@ libraries = {
 [node name="SwordAbilityController" parent="Abilities" instance=ExtResource("3_gmyng")]
 
 [node name="HurtAudioPlayer" parent="." instance=ExtResource("4_bqaqr")]
+volume_db = -1.0
 streams = Array[AudioStream]([ExtResource("5_7y3b3")])
 
 [node name="ShieldAudioPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -8.0
+volume_db = -10.0
 bus = &"SFX"
 script = ExtResource("6_ach3d")
 shield_up_stream = ExtResource("7_ftle0")
