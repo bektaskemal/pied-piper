@@ -13,9 +13,10 @@ func _ready():
 	
 
 func _unhandled_input(event):
-	if  options_instance != null and\
-	 (event.is_action_pressed("pause") or event.is_action_pressed("ui_back")) :
-		options_instance.queue_free()
+	if  options_instance == null:
+		return
+	if	event.is_action_pressed("pause") or event.is_action_pressed("ui_back") :
+		on_options_closed()
 		get_tree().root.set_input_as_handled()
 
 func on_play_pressed():
@@ -24,16 +25,21 @@ func on_play_pressed():
 	get_tree().change_scene_to_file("res://scenes/main/main.tscn")	
 	
 func on_options_pressed():
+	if options_instance != null:
+		return
 	ScreenTransition.transition()
 	await ScreenTransition.transition_halfway
+	$MenuContainer.visible = false
 	options_instance = options_scene.instantiate()
 	add_child(options_instance)
-	options_instance.back_pressed.connect(on_options_closed.bind(options_instance))
+	options_instance.back_pressed.connect(on_options_closed)
 	
-func on_options_closed(instance: Node):
+func on_options_closed():
 	ScreenTransition.transition()
 	await ScreenTransition.transition_halfway
-	instance.queue_free()	
+	$MenuContainer.visible = true
+	options_instance.queue_free()
+	%OptionsButton.grab_focus()
 		
 func on_quit_pressed():
 	get_tree().quit()

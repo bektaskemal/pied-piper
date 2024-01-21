@@ -28,7 +28,7 @@ func _unhandled_input(event):
 			options_instance.queue_free()
 		get_tree().root.set_input_as_handled()
 	elif event.is_action_pressed("ui_back") and options_instance != null:
-		options_instance.queue_free()
+		close_options()
 		get_tree().root.set_input_as_handled()
 
 func close():
@@ -52,12 +52,15 @@ func on_resume_pressed():
 func on_options_pressed():
 	options_instance = options_scene.instantiate()
 	add_child(options_instance)
-	options_instance.back_pressed.connect(on_options_closed)
+	options_instance.back_pressed.connect(close_options)
 	
-func on_options_closed():
-	options_instance.queue_free()	
+func close_options():
+	options_instance.queue_free()
+	%OptionsButton.grab_focus()
 		
 func on_quit_pressed():
+	ScreenTransition.transition()
+	await ScreenTransition.transition_halfway
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
 	

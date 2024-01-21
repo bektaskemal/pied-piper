@@ -44,8 +44,6 @@ func on_restart():
 	queue_free()
 	
 func on_endless():
-	ScreenTransition.transition()
-	await ScreenTransition.transition_halfway
 	get_tree().paused = false
 	GameEvents.emit_endless_mode()
 	queue_free()
