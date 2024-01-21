@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 var options_scene = preload("res://scenes/UI/options_menu.tscn")
-var pressed = false
 var options_instance: Node
 
 func _ready():
@@ -12,9 +11,6 @@ func _ready():
 	if OS.has_feature("web"):
 		%QuitButton.visible = false
 	
-func _process(delta):
-	if pressed and not $AnimationPlayer.is_playing():
-		get_tree().change_scene_to_file("res://scenes/main/main.tscn")	
 
 func _unhandled_input(event):
 	if  options_instance != null and\
@@ -23,15 +19,20 @@ func _unhandled_input(event):
 		get_tree().root.set_input_as_handled()
 
 func on_play_pressed():
-	$AnimationPlayer.play("out")
-	pressed = true
+	ScreenTransition.transition()
+	await ScreenTransition.transition_halfway
+	get_tree().change_scene_to_file("res://scenes/main/main.tscn")	
 	
 func on_options_pressed():
+	ScreenTransition.transition()
+	await ScreenTransition.transition_halfway
 	options_instance = options_scene.instantiate()
 	add_child(options_instance)
 	options_instance.back_pressed.connect(on_options_closed.bind(options_instance))
 	
 func on_options_closed(instance: Node):
+	ScreenTransition.transition()
+	await ScreenTransition.transition_halfway
 	instance.queue_free()	
 		
 func on_quit_pressed():

@@ -37,15 +37,15 @@ func play_jingle(result: RESULT):
 		$VictoryAudioPlayer.play()
 
 func on_restart():
-	$AnimationPlayer.play("out")
-	await $AnimationPlayer.animation_finished
+	ScreenTransition.transition()
+	await ScreenTransition.transition_halfway
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
 	queue_free()
 	
 func on_endless():
-	$AnimationPlayer.play("out")
-	await $AnimationPlayer.animation_finished
+	ScreenTransition.transition()
+	await ScreenTransition.transition_halfway
 	get_tree().paused = false
 	GameEvents.emit_endless_mode()
 	queue_free()
