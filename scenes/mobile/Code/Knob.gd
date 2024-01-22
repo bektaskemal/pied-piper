@@ -4,15 +4,13 @@ extends Sprite2D
 
 var pressing = false
 
-@export var maxLength = 50
+@export var maxLength = 35
 @export var action_left := "move_left"
 @export var action_right := "move_right"
 @export var action_up := "move_up"
 @export var action_down := "move_down"
-var deadzone = 15
 
 func _ready():
-	deadzone = parent.deadzone
 	maxLength *= parent.scale.x
 	GameEvents.ability_upgrade_added.connect(on_ability_upgraded)
 	
@@ -33,14 +31,14 @@ func _process(delta):
 		
 func calculateVector():
 	var x = (global_position.x - parent.global_position.x)
-	if abs(x) >= deadzone:
+	if abs(x) >= parent.deadzone:
 		parent.posVector.x = x/maxLength
 		if sign(x) == 1:
 			apply_action(action_right, parent.posVector.x)
 		else:
 			apply_action(action_left, abs(parent.posVector.x))
 	var y = (global_position.y - parent.global_position.y)
-	if abs(y) >= deadzone:
+	if abs(y) >= parent.deadzone:
 		parent.posVector.y = y/maxLength
 		if sign(y) == 1:
 			apply_action(action_down, parent.posVector.y)
